@@ -1,13 +1,13 @@
 using System;
 using Rubberduck.Parsing.Grammar;
 using System.Linq;
-using Rubberduck.Common;
 using Rubberduck.Inspections.Abstract;
 using Rubberduck.Inspections.Concrete;
 using Rubberduck.Parsing.Inspections.Abstract;
 using Rubberduck.Parsing.Rewriter;
 using Rubberduck.Parsing.Symbols;
 using Rubberduck.Parsing.VBA;
+using Rubberduck.Parsing.VBA.Extensions;
 
 namespace Rubberduck.Inspections.QuickFixes
 {
@@ -39,7 +39,7 @@ namespace Rubberduck.Inspections.QuickFixes
             var interfaceParameterIndex = GetParameterIndex(context);
 
             var implementationMembers =
-                _state.AllUserDeclarations.FindInterfaceImplementationMembers(interfaceMembers.First(
+                _state.DeclarationFinder.FindInterfaceImplementationMembers(interfaceMembers.First(
                     member => member.Context == matchingInterfaceMemberContext)).ToHashSet();
 
             var parameters =

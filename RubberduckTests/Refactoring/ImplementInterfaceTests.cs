@@ -104,6 +104,70 @@ End Sub
         [Test]
         [Category("Refactorings")]
         [Category("Implement Interface")]
+        public void ImplementInterface_PartiallyImplementedInterface()
+        {
+            //Input
+            const string inputCode1 =
+                @"Public Property Get a() As String
+End Property
+Public Property Let a(RHS As String)
+End Property
+Public Property Get b() As String
+End Property
+Public Property Let b(RHS As String)
+End Property";
+
+            const string inputCode2 =
+                @"Implements Class1
+
+Private Property Let Class1_b(RHS As String)
+End Property";
+
+            //Expectation
+            const string expectedCode =
+                @"Implements Class1
+
+Private Property Let Class1_b(RHS As String)
+End Property
+
+Private Property Get Class1_a() As String
+    Err.Raise 5 'TODO implement interface member
+End Property
+
+Private Property Let Class1_a(ByRef RHS As String)
+    Err.Raise 5 'TODO implement interface member
+End Property
+
+Private Property Get Class1_b() As String
+    Err.Raise 5 'TODO implement interface member
+End Property
+";
+
+            var builder = new MockVbeBuilder();
+            var project = builder.ProjectBuilder("TestProject1", ProjectProtection.Unprotected)
+                .AddComponent("Class1", ComponentType.ClassModule, inputCode1)
+                .AddComponent("Class2", ComponentType.ClassModule, inputCode2)
+                .Build();
+            var vbe = builder.AddProject(project).Build();
+            var component = project.Object.VBComponents[1];
+
+            using (var state = MockParser.CreateAndParse(vbe.Object))
+            {
+
+                var qualifiedSelection = new QualifiedSelection(new QualifiedModuleName(component), Selection.Home);
+
+                var refactoring = new ImplementInterfaceRefactoring(vbe.Object, state, null);
+                refactoring.Refactor(qualifiedSelection);
+
+                var rewriter = state.GetRewriter(component);
+                var actualCode = rewriter.GetText();
+                Assert.AreEqual(expectedCode, actualCode);
+            }
+        }
+
+        [Test]
+        [Category("Refactorings")]
+        [Category("Implement Interface")]
         public void ImplementInterface_Procedure_WithParams()
         {
             //Input
@@ -786,6 +850,144 @@ End Sub
 
                 var rewriter = state.GetRewriter(component);
                 Assert.AreEqual(expectedCode, rewriter.GetText());
+            }
+        }
+
+        [Test]
+        [TestCase(@"Public Foo As Long")]
+        [TestCase(@"Dim Foo As Long")]
+        [Category("Refactorings")]
+        [Category("Implement Interface")]
+        public void ImplementInterface_PublicIntrinsic(string inputCode1)
+        {
+            const string inputCode2 =
+                @"Implements Class1";
+
+            //Expectation
+            const string expectedCode =
+                @"Implements Class1
+
+Private Property Get Class1_Foo() As Long
+    Err.Raise 5 'TODO implement interface member
+End Property
+
+Private Property Let Class1_Foo(ByVal rhs As Long)
+    Err.Raise 5 'TODO implement interface member
+End Property
+";
+
+            var builder = new MockVbeBuilder();
+            var project = builder.ProjectBuilder("TestProject1", ProjectProtection.Unprotected)
+                .AddComponent("Class1", ComponentType.ClassModule, inputCode1)
+                .AddComponent("Class2", ComponentType.ClassModule, inputCode2)
+                .Build();
+            var vbe = builder.AddProject(project).Build();
+            var component = project.Object.VBComponents[1];
+
+            using (var state = MockParser.CreateAndParse(vbe.Object))
+            {
+
+                var qualifiedSelection = new QualifiedSelection(new QualifiedModuleName(component), Selection.Home);
+
+                var refactoring = new ImplementInterfaceRefactoring(vbe.Object, state, null);
+                refactoring.Refactor(qualifiedSelection);
+
+                var actualCode = state.GetRewriter(component).GetText();
+                Assert.AreEqual(expectedCode, actualCode);
+            }
+        }
+
+        [Test]
+        [TestCase(@"Public Foo As Object")]
+        [TestCase(@"Dim Foo As Object")]
+        [Category("Refactorings")]
+        [Category("Implement Interface")]
+        public void ImplementInterface_PublicObject(string inputCode1)
+        {
+            const string inputCode2 =
+                @"Implements Class1";
+
+            //Expectation
+            const string expectedCode =
+                @"Implements Class1
+
+Private Property Get Class1_Foo() As Object
+    Err.Raise 5 'TODO implement interface member
+End Property
+
+Private Property Set Class1_Foo(ByVal rhs As Object)
+    Err.Raise 5 'TODO implement interface member
+End Property
+";
+
+            var builder = new MockVbeBuilder();
+            var project = builder.ProjectBuilder("TestProject1", ProjectProtection.Unprotected)
+                .AddComponent("Class1", ComponentType.ClassModule, inputCode1)
+                .AddComponent("Class2", ComponentType.ClassModule, inputCode2)
+                .Build();
+            var vbe = builder.AddProject(project).Build();
+            var component = project.Object.VBComponents[1];
+
+            using (var state = MockParser.CreateAndParse(vbe.Object))
+            {
+
+                var qualifiedSelection = new QualifiedSelection(new QualifiedModuleName(component), Selection.Home);
+
+                var refactoring = new ImplementInterfaceRefactoring(vbe.Object, state, null);
+                refactoring.Refactor(qualifiedSelection);
+
+                var actualCode = state.GetRewriter(component).GetText();
+                Assert.AreEqual(expectedCode, actualCode);
+            }
+        }
+
+        [Test]
+        [TestCase(@"Public Foo As Variant")]
+        [TestCase(@"Public Foo")]
+        [TestCase(@"Dim Foo As Variant")]
+        [TestCase(@"Dim Foo")]
+        [Category("Refactorings")]
+        [Category("Implement Interface")]
+        public void ImplementInterface_PublicVariant(string inputCode1)
+        {
+            const string inputCode2 =
+                @"Implements Class1";
+
+            //Expectation
+            const string expectedCode =
+                @"Implements Class1
+
+Private Property Get Class1_Foo() As Variant
+    Err.Raise 5 'TODO implement interface member
+End Property
+
+Private Property Let Class1_Foo(ByVal rhs As Variant)
+    Err.Raise 5 'TODO implement interface member
+End Property
+
+Private Property Set Class1_Foo(ByVal rhs As Variant)
+    Err.Raise 5 'TODO implement interface member
+End Property
+";
+
+            var builder = new MockVbeBuilder();
+            var project = builder.ProjectBuilder("TestProject1", ProjectProtection.Unprotected)
+                .AddComponent("Class1", ComponentType.ClassModule, inputCode1)
+                .AddComponent("Class2", ComponentType.ClassModule, inputCode2)
+                .Build();
+            var vbe = builder.AddProject(project).Build();
+            var component = project.Object.VBComponents[1];
+
+            using (var state = MockParser.CreateAndParse(vbe.Object))
+            {
+
+                var qualifiedSelection = new QualifiedSelection(new QualifiedModuleName(component), Selection.Home);
+
+                var refactoring = new ImplementInterfaceRefactoring(vbe.Object, state, null);
+                refactoring.Refactor(qualifiedSelection);
+
+                var actualCode = state.GetRewriter(component).GetText();
+                Assert.AreEqual(expectedCode, actualCode);
             }
         }
     }

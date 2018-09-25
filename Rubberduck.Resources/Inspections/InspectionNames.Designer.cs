@@ -115,6 +115,15 @@ namespace Rubberduck.Resources.Inspections {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Annotation is duplicated.
+        /// </summary>
+        public static string DuplicatedAnnotationInspection {
+            get {
+                return ResourceManager.GetString("DuplicatedAnnotationInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Empty &apos;Case&apos; block.
         /// </summary>
         public static string EmptyCaseBlockInspection {
@@ -385,15 +394,6 @@ namespace Rubberduck.Resources.Inspections {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Module has more than one folder annotation..
-        /// </summary>
-        public static string MultipleFolderAnnotationsInspection {
-            get {
-                return ResourceManager.GetString("MultipleFolderAnnotationsInspection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Non-returning function or property getter.
         /// </summary>
         public static string NonReturningFunctionInspection {
@@ -408,6 +408,15 @@ namespace Rubberduck.Resources.Inspections {
         public static string ObjectVariableNotSetInspection {
             get {
                 return ResourceManager.GetString("ObjectVariableNotSetInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use of obsolete &apos;CDecl&apos; calling convention.
+        /// </summary>
+        public static string ObsoleteCallingConventionInspection {
+            get {
+                return ResourceManager.GetString("ObsoleteCallingConventionInspection", resourceCulture);
             }
         }
         
@@ -453,6 +462,15 @@ namespace Rubberduck.Resources.Inspections {
         public static string ObsoleteLetStatementInspection {
             get {
                 return ResourceManager.GetString("ObsoleteLetStatementInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member marked as &apos;@Obsolete&apos; is used.
+        /// </summary>
+        public static string ObsoleteMemberUsageInspection {
+            get {
+                return ResourceManager.GetString("ObsoleteMemberUsageInspection", resourceCulture);
             }
         }
         

@@ -3,7 +3,7 @@ using Antlr4.Runtime;
 using Rubberduck.Parsing.Annotations;
 using Rubberduck.Parsing.ComReflection;
 using Rubberduck.Parsing.Grammar;
-using Rubberduck.Parsing.VBA;
+using Rubberduck.Parsing.VBA.Extensions;
 using Rubberduck.VBEditor;
 
 namespace Rubberduck.Parsing.Symbols
@@ -35,6 +35,7 @@ namespace Rubberduck.Parsing.Symbols
                  accessibility,
                  declarationType, 
                  context, 
+                 null,
                  selection,
                  false,
                  asTypeContext,

@@ -115,6 +115,15 @@ namespace Rubberduck.Resources.Inspections {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An annotation is specified multiple times, but is intended to be specified only once..
+        /// </summary>
+        public static string DuplicatedAnnotationInspection {
+            get {
+                return ResourceManager.GetString("DuplicatedAnnotationInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An empty &apos;Case&apos; block without any executable statements, leaves a maintainer wondering about the intent of the code. Avoid writing code that doesn&apos;t need to be written..
         /// </summary>
         public static string EmptyCaseBlockInspection {
@@ -232,7 +241,7 @@ namespace Rubberduck.Resources.Inspections {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An annotation meant to be specified at module level cannot be used to annotate members; annotations meant to be annotate members cannot be used at module level; module and member annotations should only be specified once..
+        ///   Looks up a localized string similar to An annotation meant to be specified at module level cannot be used to annotate members; annotations meant to be annotate members cannot be used at module level..
         /// </summary>
         public static string IllegalAnnotationInspection {
             get {
@@ -385,15 +394,6 @@ namespace Rubberduck.Resources.Inspections {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rubberduck only uses the first &apos;@Folder&apos; annotation in a code module; consider removing extraneous ones..
-        /// </summary>
-        public static string MultipleFolderAnnotationsInspection {
-            get {
-                return ResourceManager.GetString("MultipleFolderAnnotationsInspection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This is likely a bug. The return value of a function or property getter must be assigned before exiting, otherwise the program will not be working with expected results. If a function has no meaningful return value, consider declaring it as a &apos;Sub&apos; procedure instead..
         /// </summary>
         public static string NonReturningFunctionInspection {
@@ -408,6 +408,15 @@ namespace Rubberduck.Resources.Inspections {
         public static string ObjectVariableNotSetInspection {
             get {
                 return ResourceManager.GetString("ObjectVariableNotSetInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows implementations of Visual Basic only support the StdCall calling convention, and use of of the CDecl calling convention is only supported in Macintosh versions of VBA. Use of this keyword in Windows will result in runtime error 49 - &apos;Bad DLL calling convention&apos;. If this procedure is only intended to be used on Macintosh hosts, it should be conditionally compiled..
+        /// </summary>
+        public static string ObsoleteCallingConventionInspection {
+            get {
+                return ResourceManager.GetString("ObsoleteCallingConventionInspection", resourceCulture);
             }
         }
         
@@ -453,6 +462,15 @@ namespace Rubberduck.Resources.Inspections {
         public static string ObsoleteLetStatementInspection {
             get {
                 return ResourceManager.GetString("ObsoleteLetStatementInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This member is marked &apos;@Obsolete&apos;. It should no longer be used, there should be a better alternative..
+        /// </summary>
+        public static string ObsoleteMemberUsageInspection {
+            get {
+                return ResourceManager.GetString("ObsoleteMemberUsageInspection", resourceCulture);
             }
         }
         

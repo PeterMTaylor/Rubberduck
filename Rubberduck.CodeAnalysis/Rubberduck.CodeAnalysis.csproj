@@ -22,6 +22,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.2</LangVersion>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -71,6 +73,7 @@
     <Compile Include="Inspections\Concrete\ApplicationWorksheetFunctionInspection.cs" />
     <Compile Include="Inspections\Concrete\AssignedByValParameterInspection.cs" />
     <Compile Include="Inspections\Concrete\DefTypeStatementInspection.cs" />
+    <Compile Include="Inspections\Concrete\DuplicatedAnnotationInspection.cs" />
     <Compile Include="Inspections\Concrete\EmptyModuleInspection.cs" />
     <Compile Include="Inspections\Concrete\EmptyBlockInspectionListenerBase.cs" />
     <Compile Include="Inspections\Concrete\EmptyCaseBlockInspection.cs" />
@@ -79,30 +82,37 @@
     <Compile Include="Inspections\Concrete\EmptyForLoopBlockInspection.cs" />
     <Compile Include="Inspections\Concrete\BooleanAssignedInIfElseInspection.cs" />
     <Compile Include="Inspections\Concrete\EmptyWhileWendBlockInspection.cs" />
+    <Compile Include="Inspections\Concrete\ObsoleteCallingConventionInspection.cs" />
     <Compile Include="Inspections\Concrete\ObsoleteErrorSyntaxInspection.cs" />
+    <Compile Include="Inspections\Concrete\ObsoleteMemberUsageInspection.cs" />
     <Compile Include="Inspections\Concrete\SheetAccessedUsingStringInspection.cs" />
     <Compile Include="Inspections\Concrete\StepIsNotSpecifiedInspection.cs" />
     <Compile Include="Inspections\Concrete\StepOneIsRedundantInspection.cs" />
     <Compile Include="Inspections\Concrete\StopKeywordInspection.cs" />
     <Compile Include="Inspections\Concrete\LineLabelNotUsedInspection.cs" />
     <Compile Include="Inspections\Concrete\IntegerDataTypeInspection.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ComparableDateValue.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ExpressionFilter.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ExpressionFilterBoolean.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ExpressionFilterDate.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ExpressionFilterFactory.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ExpressionFilterIntegral.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\FilterLimits.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\LetCoerce.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\OperatorTypesProvider.cs" />
     <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ParseTreeValueFactory.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ContextWrapperBase.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\RangeClauseExpression.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\TypeTokenPair.cs" />
     <Compile Include="Inspections\Concrete\UnreachableCaseInspection\UnreachableCaseInspectionFactoryProvider.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\RangeClauseContextWrapper.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\RangeClauseContextWrapperFactory.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\SelectCaseStmtContextWrapper.cs" />
     <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ParseTreeExpressionEvaluator.cs" />
     <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ParseTreeVisitorResults.cs" />
     <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ParseTreeValueVisitor.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\RangeClauseFilterFactory.cs" />
     <Compile Include="Inspections\Concrete\UnreachableCaseInspection\UnreachableCaseInspection.cs" />
     <Compile Include="Inspections\Concrete\ShadowedDeclarationInspection.cs" />
     <Compile Include="Inspections\Concrete\UnhandledOnErrorResumeNextInspection.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\RangeClauseFilter.cs" />
     <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ParseTreeValue.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\ParseTreeValueVisitorFactory.cs" />
-    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\SelectCaseStmtContextWrapperFactory.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\UnreachableCaseInspector.cs" />
+    <Compile Include="Inspections\Concrete\UnreachableCaseInspection\UnreachableCaseInspectorFactory.cs" />
     <Compile Include="Inspections\ParseTreeListeners\AttributeAnnotationListener.cs" />
     <Compile Include="Inspections\Concrete\ConstantNotUsedInspection.cs" />
     <Compile Include="Inspections\Concrete\DefaultProjectNameInspection.cs" />
@@ -146,6 +156,7 @@
     <Compile Include="Inspections\Concrete\ProcedureNotUsedInspection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickFixes\AccessSheetUsingCodeNameQuickFix.cs" />
+    <Compile Include="QuickFixes\RemoveDuplicatedAnnotationQuickFix.cs" />
     <Compile Include="QuickFixes\ReplaceIfElseWithConditionalStatementQuickFix.cs" />
     <Compile Include="QuickFixes\AddIdentifierToWhiteListQuickFix.cs" />
     <Compile Include="QuickFixes\AddStepOneQuickFix.cs" />

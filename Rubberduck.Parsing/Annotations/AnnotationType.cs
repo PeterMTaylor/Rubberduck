@@ -8,11 +8,11 @@ namespace Rubberduck.Parsing.Annotations
     public enum AnnotationType
     {
         /// <summary>
-        /// A flag indicating that the annotation type is valid once per module.
+        /// A flag indicating that the annotation type is valid for module.
         /// </summary>
         ModuleAnnotation = 1 << 1,
         /// <summary>
-        /// A flag indicating that the annotation type is valid once per member.
+        /// A flag indicating that the annotation type is valid for member.
         /// </summary>
         MemberAnnotation = 1 << 2,
 
@@ -43,6 +43,7 @@ namespace Rubberduck.Parsing.Annotations
         PredeclaredId = 1 << 16 | Attribute | ModuleAnnotation,
         [AttributeAnnotation("VB_Exposed", "True")]
         Exposed = 1 << 17 | Attribute | ModuleAnnotation,
+        Obsolete = 1 << 18 | MemberAnnotation
     }
 
     [AttributeUsage(AttributeTargets.Field)]

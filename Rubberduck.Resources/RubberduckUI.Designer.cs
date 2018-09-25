@@ -1058,6 +1058,33 @@ namespace Rubberduck.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ignore.
+        /// </summary>
+        public static string EmptyLineHandling_Ignore {
+            get {
+                return ResourceManager.GetString("EmptyLineHandling_Ignore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indent.
+        /// </summary>
+        public static string EmptyLineHandling_Indent {
+            get {
+                return ResourceManager.GetString("EmptyLineHandling_Indent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string EmptyLineHandling_Remove {
+            get {
+                return ResourceManager.GetString("EmptyLineHandling_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to to parse and process the projects in the VBE..
         /// </summary>
         public static string EmptyUIRefreshMessage {
@@ -1799,6 +1826,15 @@ namespace Rubberduck.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Empty line handling:.
+        /// </summary>
+        public static string IndenterSettings_EmptyLineHeading {
+            get {
+                return ResourceManager.GetString("IndenterSettings_EmptyLineHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable Options.
         /// </summary>
         public static string IndenterSettings_EnableOptionsLabel {
@@ -1840,6 +1876,15 @@ namespace Rubberduck.Resources {
         public static string IndenterSettings_ForceDebugDirectivesToColumn1 {
             get {
                 return ResourceManager.GetString("IndenterSettings_ForceDebugDirectivesToColumn1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignore empty lines when locating first comment and declaration blocks.
+        /// </summary>
+        public static string IndenterSettings_IgnoreEmptyLinesInFirstBlocks {
+            get {
+                return ResourceManager.GetString("IndenterSettings_IgnoreEmptyLinesInFirstBlocks", resourceCulture);
             }
         }
         
@@ -2033,6 +2078,15 @@ namespace Rubberduck.Resources {
         public static string Issue {
             get {
                 return ResourceManager.GetString("Issue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czech.
+        /// </summary>
+        public static string Language_CS {
+            get {
+                return ResourceManager.GetString("Language_CS", resourceCulture);
             }
         }
         
