@@ -88,6 +88,15 @@ namespace Rubberduck.Resources.Inspections {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An assignment is immediately overridden by another assignment or is never referenced..
+        /// </summary>
+        public static string AssignmentNotUsedInspection {
+            get {
+                return ResourceManager.GetString("AssignmentNotUsedInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Boolean literal &apos;{0}&apos; assigned in conditional..
         /// </summary>
         public static string BooleanAssignedInIfElseInspection {
@@ -331,6 +340,24 @@ namespace Rubberduck.Resources.Inspections {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;IsMissing&apos; will always return false with the passed argument..
+        /// </summary>
+        public static string IsMissingOnInappropriateArgumentInspection {
+            get {
+                return ResourceManager.GetString("IsMissingOnInappropriateArgumentInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;IsMissing&apos; is passed an expresssion that is not an argument to the enclosing procedure..
+        /// </summary>
+        public static string IsMissingWithNonArgumentParameterInspection {
+            get {
+                return ResourceManager.GetString("IsMissingWithNonArgumentParameterInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Line label &apos;{0}&apos; is not used..
         /// </summary>
         public static string LineLabelNotUsedInspection {
@@ -381,6 +408,15 @@ namespace Rubberduck.Resources.Inspections {
         public static string ModuleScopeDimKeywordInspection {
             get {
                 return ResourceManager.GetString("ModuleScopeDimKeywordInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module &apos;{0}&apos; has no &apos;@Folder&apos; annotation.
+        /// </summary>
+        public static string ModuleWithoutFolderInspection {
+            get {
+                return ResourceManager.GetString("ModuleWithoutFolderInspection", resourceCulture);
             }
         }
         
@@ -498,6 +534,15 @@ namespace Rubberduck.Resources.Inspections {
         public static string ObsoleteTypeHintInspection {
             get {
                 return ResourceManager.GetString("ObsoleteTypeHintInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;On Local Error&apos; statement detected..
+        /// </summary>
+        public static string OnLocalErrorInspection {
+            get {
+                return ResourceManager.GetString("OnLocalErrorInspection", resourceCulture);
             }
         }
         

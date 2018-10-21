@@ -453,9 +453,17 @@ namespace Rubberduck.Properties {
             "Warning\" InspectionType=\"MaintainabilityAndReadabilityIssues\" />\r\n    <CodeInspe" +
             "ction Name=\"ObsoleteCallingConventionInspection\" Severity=\"Warning\" InspectionTy" +
             "pe=\"CodeQualityIssues\" />\r\n    <CodeInspection Name=\"DuplicatedAnnotationInspect" +
-            "ion\" Severity=\"Error\" InspectionType=\"RubberduckOpportunities\" />\r\n  </CodeInspe" +
-            "ctions>\r\n  <WhitelistedIdentifiers />\r\n  <RunInspectionsOnSuccessfulParse>true</" +
-            "RunInspectionsOnSuccessfulParse>\r\n</CodeInspectionSettings>")]
+            "ion\" Severity=\"Error\" InspectionType=\"RubberduckOpportunities\" />\r\n    <CodeInsp" +
+            "ection Name=\"ModuleWithoutFolderInspection\" Severity=\"Suggestion\" InspectionType" +
+            "=\"RubberduckOpportunities\" />\r\n    <CodeInspection Name=\"OnLocalErrorInspection\"" +
+            " Severity=\"Suggestion\" InspectionType=\"LanguageOpportunities\" />\r\n    <CodeInspe" +
+            "ction Name=\"IsMissingOnInappropriateArgumentInspection\" Severity=\"Warning\" Inspe" +
+            "ctionType=\"CodeQualityIssues\" />\r\n    <CodeInspection Name=\"IsMissingWithNonArgu" +
+            "mentParameterInspection\" Severity=\"Warning\" InspectionType=\"CodeQualityIssues\" /" +
+            ">\r\n    <CodeInspection Name=\"AssignmentNotUsedInspection\" Severity=\"Suggestion\" " +
+            "InspectionType=\"CodeQualityIssues\" />\r\n  </CodeInspections>\r\n  <WhitelistedIdent" +
+            "ifiers />\r\n  <RunInspectionsOnSuccessfulParse>true</RunInspectionsOnSuccessfulPa" +
+            "rse>\r\n</CodeInspectionSettings>")]
         public global::Rubberduck.Settings.CodeInspectionSettings CodeInspectionSettings {
             get {
                 return ((global::Rubberduck.Settings.CodeInspectionSettings)(this["CodeInspectionSettings"]));
