@@ -102,8 +102,8 @@ namespace Rubberduck.Navigation.CodeExplorer
                     return;
                 }
 
-                _selectedItem = value;
                 ExpandToNode(value);
+                _selectedItem = value;
 
                 OnPropertyChanged();
 
@@ -230,6 +230,7 @@ namespace Rubberduck.Navigation.CodeExplorer
                         library.UpdateChildren();
                     }
 
+                    Unparsed = !Projects.Any();
                     IsBusy = false;
                 });
                 return;
@@ -270,7 +271,7 @@ namespace Rubberduck.Navigation.CodeExplorer
 
                 foreach (var project in adding)
                 {
-                    var model = new CodeExplorerProjectViewModel(project, ref updates, _state, _vbe);
+                    var model = new CodeExplorerProjectViewModel(project, ref updates, _state, _vbe) { Filter = Search };
                     Projects.Add(model);
                 }
 
@@ -434,12 +435,12 @@ namespace Rubberduck.Navigation.CodeExplorer
         {
             while (true)
             {
+                node = node.Parent;
                 if (node == null)
                 {
                     return;
                 }
                 node.IsExpanded = true;
-                node = node.Parent;
             }
         }
 
