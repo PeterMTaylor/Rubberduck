@@ -24,13 +24,15 @@ namespace Rubberduck.UI.CodeExplorer.Commands
         {
             _projectsProvider = projectsProvider;
             _vbe = vbe;
+
+            AddToCanExecuteEvaluation(SpecialEvaluateCanExecute);
         }
 
         public sealed override IEnumerable<Type> ApplicableNodeTypes => ApplicableNodes;
 
-        protected override bool EvaluateCanExecute(object parameter)
+        private bool SpecialEvaluateCanExecute(object parameter)
         {
-            if (!base.EvaluateCanExecute(parameter) || !(parameter is CodeExplorerItemViewModel node))
+            if (!(parameter is CodeExplorerItemViewModel node))
             {
                 return false;   
             }
@@ -48,9 +50,9 @@ namespace Rubberduck.UI.CodeExplorer.Commands
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (declaration.DeclarationType)
                 {
-                    case DeclarationType.ClassModule when qualifiedModuleName.ComponentType != ComponentType.Document:
-                        return _projectsProvider.Component(qualifiedModuleName).HasDesigner;
                     case DeclarationType.ClassModule:
+                        return _projectsProvider.Component(qualifiedModuleName).HasDesigner;
+                    case DeclarationType.Document:
                         using (var app = _vbe.HostApplication())
                         {
                             return app?.CanOpenDocumentDesigner(qualifiedModuleName) ?? false;
@@ -68,10 +70,9 @@ namespace Rubberduck.UI.CodeExplorer.Commands
 
         protected override void OnExecute(object parameter)
         {
-            if (!base.EvaluateCanExecute(parameter) || 
-                !(parameter is CodeExplorerItemViewModel node) ||
+            if (!(parameter is CodeExplorerItemViewModel node) ||
                 node.Declaration == null ||
-                node.Declaration.DeclarationType != DeclarationType.ClassModule)
+                !node.Declaration.DeclarationType.HasFlag(DeclarationType.ClassModule))
             {
                 return;
             }

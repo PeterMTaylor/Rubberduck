@@ -59,7 +59,7 @@ moduleConfig :
 
 moduleConfigProperty :
     BEGINPROPERTY whiteSpace unrestrictedIdentifier (LPAREN numberLiteral RPAREN)? (whiteSpace GUIDLITERAL)? endOfStatement
-        (moduleConfigProperty | moduleConfigElement)+
+        (moduleConfigProperty | moduleConfigElement)*
     ENDPROPERTY endOfStatement
 ;
 
@@ -416,8 +416,9 @@ elseBlock :
 // 5.4.2.9 Single-line If Statement
 singleLineIfStmt : ifWithNonEmptyThen | ifWithEmptyThen;
 ifWithNonEmptyThen : IF whiteSpace? booleanExpression whiteSpace? THEN whiteSpace? listOrLabel (whiteSpace singleLineElseClause)?;
-ifWithEmptyThen : IF whiteSpace? booleanExpression whiteSpace? THEN endOfStatement? whiteSpace? singleLineElseClause;
+ifWithEmptyThen : IF whiteSpace? booleanExpression whiteSpace? THEN whiteSpace? emptyThenStatement? singleLineElseClause;
 singleLineElseClause : ELSE whiteSpace? listOrLabel?;
+
 // lineNumberLabel should actually be "statement-label" according to MS VBAL but they only allow lineNumberLabels:
 // A <statement-label> that occurs as the first element of a <list-or-label> element has the effect 
 // as if the <statement-label> was replaced with a <goto-statement> containing the same 
@@ -427,7 +428,9 @@ listOrLabel :
     lineNumberLabel (whiteSpace? COLON whiteSpace? sameLineStatement?)*
     | (COLON whiteSpace?)? sameLineStatement (whiteSpace? COLON whiteSpace? sameLineStatement?)*
 ;
+
 sameLineStatement : mainBlockStmt;
+emptyThenStatement : (COLON whiteSpace?)+;
 booleanExpression : expression;
 
 implementsStmt : IMPLEMENTS whiteSpace expression;
@@ -568,7 +571,13 @@ withStmt :
 ;
 
 // Special forms with special syntax, only available in VBA reports or VB6 forms and pictureboxes.
-lineSpecialForm : expression whiteSpace ((STEP whiteSpace?)? tuple)? MINUS (STEP whiteSpace?)? tuple whiteSpace? (COMMA whiteSpace? expression)? whiteSpace? (COMMA whiteSpace? lineSpecialFormOption)?;
+// lineSpecialFormOption is required if expression is missing
+lineSpecialForm : expression whiteSpace ((STEP whiteSpace?)? tuple)?
+    whiteSpace? MINUS whiteSpace?
+	(STEP whiteSpace?)? tuple whiteSpace?
+	(COMMA whiteSpace? expression? whiteSpace?)?
+	(COMMA whiteSpace? lineSpecialFormOption)?
+;
 circleSpecialForm : (expression whiteSpace? DOT whiteSpace?)? CIRCLE whiteSpace (STEP whiteSpace?)? tuple (whiteSpace? COMMA whiteSpace? expression)+;
 scaleSpecialForm : (expression whiteSpace? DOT whiteSpace?)? SCALE whiteSpace tuple whiteSpace? MINUS whiteSpace? tuple;
 pSetSpecialForm : (expression whiteSpace? DOT whiteSpace?)? PSET (whiteSpace STEP)? whiteSpace? tuple whiteSpace? (COMMA whiteSpace? expression)?;
@@ -622,7 +631,10 @@ standaloneLineNumberLabel :
     lineNumberLabel whiteSpace? COLON
     | lineNumberLabel;
 combinedLabels : lineNumberLabel whiteSpace identifierStatementLabel;
-lineNumberLabel : numberLiteral;
+// Technically, the negative numbers are illegal but VBE can prettify a
+// &HFFFFFFFF into a -1 which becomes a legal line number. Editing the same
+// line subsequently then breaks it. 
+lineNumberLabel : MINUS? numberLiteral; 
 
 numberLiteral : HEXLITERAL | OCTLITERAL | FLOATLITERAL | INTEGERLITERAL;
 
